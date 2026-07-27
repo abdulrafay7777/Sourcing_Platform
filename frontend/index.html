@@ -13,7 +13,7 @@
           var localTheme = localStorage.getItem('theme');
           var theme = localTheme;
           if (!theme) {
-            theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            theme = 'light';
           }
           document.documentElement.setAttribute('data-theme', theme);
         } catch (e) {}
