@@ -51,10 +51,16 @@
 
 .timeline-content {
   flex-grow: 1;
-  padding: 1.5rem 2rem;
+  padding: 1.25rem 1rem;
   border-radius: var(--radius-xl);
   margin-bottom: 2rem;
   transition: transform 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .timeline-content {
+    padding: 1.5rem 2rem;
+  }
 }
 
 .timeline-item:hover .timeline-content {

@@ -183,11 +183,21 @@ select {
 /* Glassmorphism Utilities */
 .glass-panel {
   background: var(--glass-panel-bg);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border: 1px solid var(--color-border);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  transform: translateZ(0); /* Hardware acceleration */
+  will-change: transform, box-shadow;
+}
+
+@media (min-width: 768px) {
+  .glass-panel {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .glass-panel:hover {
