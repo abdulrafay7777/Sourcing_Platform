@@ -42,8 +42,14 @@
 .about-intro-box {
   flex: 1.2;
   min-width: 0;
-  padding: 3rem;
+  padding: 1.5rem;
   border-radius: var(--radius-xl);
+}
+
+@media (min-width: 768px) {
+  .about-intro-box {
+    padding: 3rem;
+  }
 }
 
 .about-intro-title {
