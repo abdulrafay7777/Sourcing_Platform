@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Phone, Mail, MapPin, PackageSearch } from 'lucide-react'
+import { Phone, Mail, MapPin, PackageSearch, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
 import './Footer.css'
 
 export default function Footer() {
@@ -16,6 +16,20 @@ export default function Footer() {
           <p className="footer-text">
             Making wholesale sourcing simple, transparent, and efficient for businesses across Pakistan.
           </p>
+          <div className="footer-socials">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <Facebook size={20} />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <Twitter size={20} />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <Instagram size={20} />
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Linkedin size={20} />
+            </a>
+          </div>
         </div>
 
         {/* Quick Links */}
