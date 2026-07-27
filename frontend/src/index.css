@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+
+:root {
+  --color-ink-950: #030305;
+  --color-ink-900: #0a0a0f;
+  --color-ink-800: #12121a;
+  --color-ink-700: #1a1a26;
+  
+  --color-accent-400: #5eead4;
+  --color-accent-500: #2dd4bf;
+  --color-accent-600: #14b8a6;
+  --color-accent-glow: rgba(45, 212, 191, 0.4);
+  
+  --color-secondary-400: #818cf8;
+  --color-secondary-500: #6366f1;
+  --color-secondary-glow: rgba(99, 102, 241, 0.4);
+
+  --color-text: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-text-faint: #475569;
+  
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
+  --color-danger: #f87171;
+  
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+  
+  --max-width: 1152px;
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Outfit', system-ui, sans-serif;
+  
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-bg-hover: rgba(255, 255, 255, 0.08);
+  --glass-bg-active: rgba(255, 255, 255, 0.12);
+  --glass-panel-bg: rgba(18, 18, 26, 0.6);
+  --body-gradient-1: rgba(45, 212, 191, 0.03);
+  --body-gradient-2: rgba(99, 102, 241, 0.04);
+}
+
+[data-theme='light'] {
+  --color-ink-950: #f8fafc;
+  --color-ink-900: #f1f5f9;
+  --color-ink-800: #e2e8f0;
+  --color-ink-700: #cbd5e1;
+  
+  --color-accent-400: #0d9488;
+  --color-accent-500: #0f766e;
+  --color-accent-600: #115e59;
+  
+  --color-secondary-400: #4f46e5;
+  --color-secondary-500: #4338ca;
+
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
+  --color-text-faint: #94a3b8;
+  
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-border-hover: rgba(0, 0, 0, 0.2);
+  
+  --glass-bg: rgba(0, 0, 0, 0.03);
+  --glass-bg-hover: rgba(0, 0, 0, 0.08);
+  --glass-bg-active: rgba(0, 0, 0, 0.12);
+  --glass-panel-bg: rgba(255, 255, 255, 0.7);
+  --body-gradient-1: rgba(13, 148, 136, 0.05);
+  --body-gradient-2: rgba(79, 70, 229, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink-950);
+  background-image: 
+    radial-gradient(circle at 15% 50%, var(--body-gradient-1), transparent 25%),
+    radial-gradient(circle at 85% 30%, var(--body-gradient-2), transparent 25%);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+}
+
+/* Ensure non-clickable UI feels native (no I-beam text cursor by default) */
+body, h1, h2, h3, h4, h5, h6, p, span, li, div {
+  cursor: default;
+}
+
+/* Keep interactive elements clickable */
+a, button, label, .upload-dropzone {
+  cursor: pointer;
+}
+
+input, textarea {
+  cursor: text;
+}
+
+select {
+  cursor: pointer;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Page Transition Wrapper */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Split Section Layout (text + image side by side) */
+.split-section {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .split-section {
+    flex-direction: row;
+    gap: 4rem;
+    align-items: center;
+  }
+}
+
+.split-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.split-image {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.split-image img {
+  width: 100%;
+  max-width: 520px;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--color-border);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.split-image img:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--glass-panel-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius-full);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-accent-500), var(--color-accent-600));
+  color: var(--color-ink-950);
+  box-shadow: 0 0 20px rgba(45, 212, 191, 0.2);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 25px rgba(45, 212, 191, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: var(--glass-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(8px);
+}
+
+.btn-secondary:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 0.6rem 1.4rem;
+  font-size: 0.85rem;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
