@@ -2,7 +2,8 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { 
   ArrowRight, FileSearch, ShieldCheck, Truck, Handshake, 
-  DollarSign, Package, CheckCircle2, Factory, ChevronRight 
+  DollarSign, Package, CheckCircle2, Factory, ChevronRight,
+  Star, Quote
 } from 'lucide-react'
 import './Home.css'
 import { pageTransition, fadeUp } from '../utils/animations'
@@ -40,6 +41,24 @@ const benefits = [
   'Quality inspection available',
   'Reliable communication',
   'Professional procurement support'
+]
+
+const testimonials = [
+  {
+    quote: "PakSource completely eliminated the hassle of traveling to Lahore to find suppliers. They found a much better rate for our packaging materials.",
+    author: "Ahmed ",
+    company: "Retail Store Owner"
+  },
+  {
+    quote: "We needed industrial hardware in bulk. Not only did they find the right supplier, but their verification process gave us total peace of mind.",
+    author: "Zainab Ali",
+    company: "Manufacturing Firm"
+  },
+  {
+    quote: "Exceptional service. They procured samples for us within days and helped negotiate a fantastic deal for our new electronics line.",
+    author: "Faisal",
+    company: "E-commerce Seller"
+  }
 ]
 
 export default function Home() {
@@ -178,6 +197,45 @@ export default function Home() {
               >
                 <CheckCircle2 size={20} className="trust-icon" />
                 <span>{benefit}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="section-container bg-darker">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="section-title">Client Success Stories</h2>
+            <p className="section-subtitle">Hear from businesses we've helped scale</p>
+          </div>
+          <div className="testimonials-grid">
+            {testimonials.map((testimonial, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="testimonial-card glass-panel"
+              >
+                <div className="testimonial-stars">
+                  <Star size={18} fill="currentColor" />
+                  <Star size={18} fill="currentColor" />
+                  <Star size={18} fill="currentColor" />
+                  <Star size={18} fill="currentColor" />
+                  <Star size={18} fill="currentColor" />
+                </div>
+                <Quote className="testimonial-quote-icon" size={32} />
+                <p className="testimonial-quote">"{testimonial.quote}"</p>
+                <div className="testimonial-author-box">
+                  <div className="testimonial-avatar">{testimonial.author.charAt(0)}</div>
+                  <div className="testimonial-info">
+                    <h4 className="testimonial-author">{testimonial.author}</h4>
+                    <p className="testimonial-company">{testimonial.company}</p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
