@@ -103,9 +103,20 @@
 }
 
 .navbar-mobile-inner a {
-  color: var(--color-text);
   font-weight: 500;
   font-size: 1.1rem;
+}
+
+.mobile-nav-link {
+  position: relative;
+  width: fit-content;
+  color: var(--color-text-muted);
+  transition: color 0.3s ease;
+}
+
+.mobile-nav-link.active,
+.mobile-nav-link:hover {
+  color: var(--color-text);
 }
 
 .nav-actions {

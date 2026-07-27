@@ -26,7 +26,7 @@ export default function App() {
           <Route path="/more" element={<More />} />
         </Routes>
       </AnimatePresence>
-      <Footer />
+      {location.pathname !== '/request-sourcing' && <Footer />}
     </div>
     </ThemeProvider>
   )

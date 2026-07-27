@@ -341,10 +341,16 @@
 }
 
 .testimonial-card {
-  padding: 2.5rem 2rem;
+  padding: 1.5rem;
   position: relative;
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .testimonial-card {
+    padding: 2.5rem 2rem;
+  }
 }
 
 .testimonial-stars {

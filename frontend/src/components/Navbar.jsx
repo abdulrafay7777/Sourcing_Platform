@@ -74,15 +74,30 @@ export default function Navbar() {
             className="navbar-mobile-menu"
           >
             <div className="navbar-mobile-inner">
-              {links.map((l) => (
-                <Link key={l.to} to={l.to} onClick={() => setMenuOpen(false)}>
-                  {l.label}
-                </Link>
-              ))}
-              <Link to="/request-sourcing" className="mobile-nav-btn" onClick={() => setMenuOpen(false)}>
+              {links.map((l) => {
+                const isActive = location.pathname === l.to;
+                return (
+                  <Link key={l.to} to={l.to} className={`mobile-nav-link ${isActive ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>
+                    {l.label}
+                    {isActive && (
+                      <motion.div
+                        layoutId="navbar-mobile-indicator"
+                        className="nav-link-indicator"
+                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                );
+              })}
+              <Link 
+                to="/request-sourcing" 
+                className="btn btn-primary" 
+                style={{ marginTop: '0.5rem', justifyContent: 'center' }}
+                onClick={() => setMenuOpen(false)}
+              >
                 Request Sourcing
               </Link>
-              <button onClick={toggleTheme} className="mobile-theme-btn" style={{marginTop: '1rem', background: 'transparent', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600}}>
+              <button onClick={toggleTheme} className="mobile-theme-btn" style={{marginTop: '0.5rem', background: 'transparent', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600}}>
                 {theme === 'dark' ? <><Sun size={20} /> Light Mode</> : <><Moon size={20} /> Dark Mode</>}
               </button>
             </div>
