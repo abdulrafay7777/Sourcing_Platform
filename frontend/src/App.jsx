@@ -17,7 +17,7 @@ export default function App() {
     <ThemeProvider>
       <div className="page-wrapper">
       <Navbar />
-      <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })}>
+      <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
           <Route path="/request-sourcing" element={<RequestSourcing />} />

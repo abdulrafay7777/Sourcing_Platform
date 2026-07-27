@@ -117,6 +117,8 @@
   box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.15);
 }
 
+/* Fix browser autofill styling - handled globally in index.css */
+
 .field select option {
   background-color: var(--color-ink-950);
   color: var(--color-text);
