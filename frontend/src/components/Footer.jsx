@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { Phone, Mail, MapPin, PackageSearch, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
+import { Phone, Mail, MapPin, PackageSearch, Facebook, Instagram, Linkedin } from 'lucide-react'
+import { FaWhatsapp } from 'react-icons/fa'
 import './Footer.css'
 
 export default function Footer() {
@@ -20,8 +21,8 @@ export default function Footer() {
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <Facebook size={20} />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-              <Twitter size={20} />
+            <a href="https://wa.me/923395186263" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <FaWhatsapp size={20} />
             </a>
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <Instagram size={20} />
