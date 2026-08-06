@@ -40,6 +40,7 @@ export default function RequestSourcing() {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
   const [requestId, setRequestId] = useState(null)
+  const [trackingId, setTrackingId] = useState(null)
 
   const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }))
 
@@ -74,7 +75,11 @@ export default function RequestSourcing() {
       const res = await axios.post(`${API_BASE}/api/sourcing-requests`, payload, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
-      setRequestId(res.data.request_id)
+      const reqId = res.data.request_id
+      setRequestId(reqId)
+      
+      const shortId = reqId.toString().split('-').pop() || reqId.toString();
+      setTrackingId(`TRK-${shortId.substring(0,6).toUpperCase()}`)
     } catch (err) {
       setError(err?.response?.data?.detail ?? 'Something went wrong. Please try again.')
     } finally {
@@ -82,30 +87,8 @@ export default function RequestSourcing() {
     }
   }
 
-  if (requestId) {
-    return (
-      <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit" className="success-page">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, ease: 'easeOut', delay: 0.2 }}
-        >
-          <div className="success-icon-wrapper">
-            <CheckCircle2 size={48} />
-          </div>
-          <h2>Thank you!</h2>
-          <p>Your Product Sourcing Request has been submitted successfully.</p>
-          <div className="request-id-box">{requestId}</div>
-          <p className="success-note">
-            Our representative will review your request and contact you shortly to discuss the next steps.
-          </p>
-        </motion.div>
-      </motion.div>
-    )
-  }
-
   return (
-    <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit" className="form-page">
+    <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit" className="form-page relative">
       <div className="form-header">
         <h1>Request Sourcing</h1>
         <p>Tell us what you're looking for and we'll get you vetted quotations from Lahore wholesalers.</p>
@@ -216,6 +199,53 @@ export default function RequestSourcing() {
           </button>
         </form>
       </div>
+
+      <AnimatePresence>
+        {requestId && (
+          <motion.div 
+            className="modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <motion.div
+              className="success-modal"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ type: "spring", damping: 20, stiffness: 400 }}
+            >
+              <div className="success-icon-wrapper">
+                <CheckCircle2 size={36} />
+              </div>
+              
+              <h2>Request Received</h2>
+              
+              <p>
+                Thank you for choosing us. Our team will review your sourcing request and contact you shortly.
+              </p>
+              
+              <div className="tracking-id-container">
+                <span className="tracking-label">Tracking ID</span>
+                <div className="request-id-box">{trackingId}</div>
+              </div>
+              
+              <button 
+                className="btn-done"
+                onClick={() => {
+                 setForm(initialState);
+                 setFiles([]);
+                 setRequestId(null);
+                 setTrackingId(null);
+                }}
+              >
+                Done
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }

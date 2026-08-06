@@ -1,13 +1,12 @@
-import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from .config import settings
 
 # For local dev, SQLite is fine. Swap to Postgres in production:
 # DATABASE_URL = "postgresql://user:password@localhost:5432/paksource"
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./paksource.db")
 
-connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
-engine = create_engine(DATABASE_URL, connect_args=connect_args)
+connect_args = {"check_same_thread": False} if settings.database_url.startswith("sqlite") else {}
+engine = create_engine(settings.database_url, connect_args=connect_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 

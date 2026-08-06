@@ -137,9 +137,9 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus,
 select:-webkit-autofill:active {
-  -webkit-text-fill-color: #f8fafc !important;
-  color: #f8fafc !important;
-  -webkit-box-shadow: 0 0 0px 1000px #0f172a inset !important;
+  -webkit-text-fill-color: var(--color-text) !important;
+  color: var(--color-text) !important;
+  background-color: transparent !important;
   transition: background-color 5000s ease-in-out 0s !important;
 }
 

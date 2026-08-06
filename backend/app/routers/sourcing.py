@@ -4,12 +4,13 @@ import uuid
 from datetime import datetime
 from typing import Optional, List
 
-from fastapi import APIRouter, Depends, UploadFile, File, Form, HTTPException
+from fastapi import APIRouter, Depends, UploadFile, File, Form, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 
 from ..database import get_db
 from ..models import SourcingRequest, RequestFile
 from ..schemas import SourcingRequestOut, SourcingRequestCreated
+from ..email import send_sourcing_email
 
 router = APIRouter(prefix="/api/sourcing-requests", tags=["sourcing-requests"])
 
@@ -24,6 +25,7 @@ MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
 
 @router.post("", response_model=SourcingRequestCreated, status_code=201)
 async def create_sourcing_request(
+    background_tasks: BackgroundTasks,
     company_name: str = Form(...),
     owner_name: str = Form(...),
     phone: str = Form(...),
@@ -78,7 +80,16 @@ async def create_sourcing_request(
     db.commit()
     db.refresh(sourcing_request)
 
-    # TODO: trigger email + WhatsApp notification here (background task/queue)
+    background_tasks.add_task(
+        send_sourcing_email,
+        request_id=sourcing_request.request_id,
+        company_name=sourcing_request.company_name,
+        product_name=sourcing_request.product_name,
+        email=sourcing_request.email,
+        phone=sourcing_request.phone,
+        description=sourcing_request.description or ""
+    )
+    # WhatsApp notification TODO left for later
 
     return SourcingRequestCreated(request_id=sourcing_request.request_id, status=sourcing_request.status)
 

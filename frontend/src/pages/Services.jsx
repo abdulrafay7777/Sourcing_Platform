@@ -3,6 +3,7 @@ import {
   Search, BarChart2, ShieldCheck, Box, Handshake, TrendingUp, 
   FileText, MessageSquare, MapPin, ListChecks, CheckCircle, Package 
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { pageTransition, fadeUp } from '../utils/animations'
 import './Services.css'
 import servicesImage from '../assets/images/services_illustration.png'
@@ -38,6 +39,11 @@ export default function Services() {
             <p className="section-text">
               From sourcing a single product to managing full procurement cycles, we offer a complete suite of services to connect your business with trusted Lahore wholesalers.
             </p>
+            <div style={{ marginTop: '2rem' }}>
+              <Link to="/request-sourcing" className="btn btn-primary" style={{ padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold' }}>
+                Book Our Service
+              </Link>
+            </div>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}

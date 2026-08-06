@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, MessageCircle, Mail, MapPin, Clock, ChevronDown, ChevronUp } from 'lucide-react'
+import { Phone, Mail, MapPin, Clock, ChevronDown, ChevronUp } from 'lucide-react'
+import { FaWhatsapp } from 'react-icons/fa'
 import { pageTransition, fadeUp } from '../utils/animations'
 import './More.css'
 
@@ -66,7 +67,7 @@ export default function More() {
             </motion.div>
             
             <motion.div variants={fadeUp} className="contact-card glass-panel">
-              <div className="contact-icon-wrapper text-secondary"><MessageCircle size={24} /></div>
+              <div className="contact-icon-wrapper" style={{ color: '#25D366' }}><FaWhatsapp size={24} /></div>
               <h4 className="contact-card-title">WhatsApp</h4>
               <p className="contact-card-text">+92 3395186263</p>
             </motion.div>
