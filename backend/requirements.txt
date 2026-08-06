@@ -6,4 +6,4 @@ python-multipart
 alembic
 psycopg2-binary
 python-dotenv
-
+pydantic-settings

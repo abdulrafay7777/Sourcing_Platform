@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { UploadCloud, CheckCircle2, Loader2, X } from 'lucide-react'
+import { UploadCloud, Loader2, X } from 'lucide-react'
 import axios from 'axios'
 import './RequestSourcing.css'
-
 import { pageTransition } from '../utils/animations'
+import Field from '../components/forms/Field'
+import SuccessModal from '../components/forms/SuccessModal'
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://localhost:8000'
 
@@ -22,18 +23,6 @@ const initialState = {
   targetPrice: '',
   deliveryDate: '',
 }
-
-
-
-function Field({ label, children }) {
-  return (
-    <div className="field">
-      <label>{label}</label>
-      {children}
-    </div>
-  )
-}
-
 export default function RequestSourcing() {
   const [form, setForm] = useState(initialState)
   const [files, setFiles] = useState([])
@@ -202,48 +191,15 @@ export default function RequestSourcing() {
 
       <AnimatePresence>
         {requestId && (
-          <motion.div 
-            className="modal-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-          >
-            <motion.div
-              className="success-modal"
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: "spring", damping: 20, stiffness: 400 }}
-            >
-              <div className="success-icon-wrapper">
-                <CheckCircle2 size={36} />
-              </div>
-              
-              <h2>Request Received</h2>
-              
-              <p>
-                Thank you for choosing us. Our team will review your sourcing request and contact you shortly.
-              </p>
-              
-              <div className="tracking-id-container">
-                <span className="tracking-label">Tracking ID</span>
-                <div className="request-id-box">{trackingId}</div>
-              </div>
-              
-              <button 
-                className="btn-done"
-                onClick={() => {
-                 setForm(initialState);
-                 setFiles([]);
-                 setRequestId(null);
-                 setTrackingId(null);
-                }}
-              >
-                Done
-              </button>
-            </motion.div>
-          </motion.div>
+          <SuccessModal 
+            trackingId={trackingId}
+            onDone={() => {
+              setForm(initialState);
+              setFiles([]);
+              setRequestId(null);
+              setTrackingId(null);
+            }} 
+          />
         )}
       </AnimatePresence>
     </motion.div>
