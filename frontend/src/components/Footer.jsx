@@ -54,7 +54,7 @@ export default function Footer() {
             </li>
             <li>
               <Mail size={18} className="text-muted" />
-              <span>Contact@paksourceconnect.com</span>
+              <span>contact@paksourceconnect.com</span>
             </li>
             <li>
               <MapPin size={18} className="text-muted" />

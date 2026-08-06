@@ -75,7 +75,7 @@ export default function More() {
             <motion.div variants={fadeUp} className="contact-card glass-panel">
               <div className="contact-icon-wrapper text-accent"><Mail size={24} /></div>
               <h4 className="contact-card-title">Email</h4>
-              <p className="contact-card-text">info@paksourceconnect.com</p>
+              <p className="contact-card-text">contact@paksourceconnect.com</p>
             </motion.div>
 
             <motion.div variants={fadeUp} className="contact-card glass-panel">
