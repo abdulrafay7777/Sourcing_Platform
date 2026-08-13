@@ -94,21 +94,6 @@ export default function About() {
               </p>
             </motion.div>
           </div>
-
-          <motion.div variants={fadeUp} initial="initial" whileInView="animate" viewport={{ once: true, amount: 0.3 }} className="markets-section">
-            <h2 className="markets-title">Wholesale Markets We Navigate</h2>
-            <p className="markets-subtitle">
-              We have established strong relationships across all major wholesale hubs in Lahore, ensuring you get the best rates and authentic products directly from the source.
-            </p>
-            <div className="markets-list">
-              <div className="market-tag">Shah Alam Market (General Goods & Cosmetics)</div>
-              <div className="market-tag">Azam Cloth Market (Textiles & Garments)</div>
-              <div className="market-tag">Hall Road (Electronics & Mobiles)</div>
-              <div className="market-tag">Urdu Bazar (Stationery & Paper)</div>
-              <div className="market-tag">Brandreth Road (Hardware & Tools)</div>
-              <div className="market-tag">Akbari Mandi (Grains & Spices)</div>
-            </div>
-          </motion.div>
         </div>
       </section>
     </motion.div>

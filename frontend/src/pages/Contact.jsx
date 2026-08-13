@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Phone, Mail, MapPin, Clock, ChevronDown, ChevronUp } from 'lucide-react'
 import { FaWhatsapp } from 'react-icons/fa'
 import { pageTransition, fadeUp } from '../utils/animations'
-import './More.css'
+import './Contact.css'
 
 const faqs = [
   { question: 'Do you sell products?', answer: 'No. We provide sourcing and procurement services.' },
@@ -39,9 +39,9 @@ function FAQItem({ question, answer }) {
   )
 }
 
-export default function More() {
+export default function Contact() {
   return (
-    <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit" className="more-page">
+    <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit" className="contact-page">
       
       {/* Header */}
       <section className="section-container pb-0">
@@ -63,13 +63,13 @@ export default function More() {
             <motion.div variants={fadeUp} className="contact-card glass-panel">
               <div className="contact-icon-wrapper"><Phone size={24} /></div>
               <h4 className="contact-card-title">Phone</h4>
-              <p className="contact-card-text">+92 3395186263</p>
+              <p className="contact-card-text">+92 313 8385059</p>
             </motion.div>
             
             <motion.div variants={fadeUp} className="contact-card glass-panel">
               <div className="contact-icon-wrapper" style={{ color: '#25D366' }}><FaWhatsapp size={24} /></div>
               <h4 className="contact-card-title">WhatsApp</h4>
-              <p className="contact-card-text">+92 3395186263</p>
+              <p className="contact-card-text">+92 313 8385059</p>
             </motion.div>
             
             <motion.div variants={fadeUp} className="contact-card glass-panel">

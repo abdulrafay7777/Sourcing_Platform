@@ -7,7 +7,8 @@ import Home from './pages/Home'
 import RequestSourcing from './pages/RequestSourcing'
 import About from './pages/About'
 import Services from './pages/Services'
-import More from './pages/More'
+import Contact from './pages/Contact'
+import FloatingWhatsApp from './components/FloatingWhatsApp'
 
 export default function App() {
   const location = useLocation()
@@ -15,18 +16,19 @@ export default function App() {
   return (
     <ThemeProvider>
       <div className="page-wrapper">
-      <Navbar />
-      <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })}>
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
-          <Route path="/request-sourcing" element={<RequestSourcing />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/more" element={<More />} />
-        </Routes>
-      </AnimatePresence>
-      {location.pathname !== '/request-sourcing' && <Footer />}
-    </div>
+        <Navbar />
+        <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })}>
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route path="/request-sourcing" element={<RequestSourcing />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </AnimatePresence>
+        {location.pathname !== '/request-sourcing' && <Footer />}
+        <FloatingWhatsApp />
+      </div>
     </ThemeProvider>
   )
 }

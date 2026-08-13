@@ -18,16 +18,16 @@ export default function Footer() {
             Making wholesale sourcing simple, transparent, and efficient for businesses across Pakistan.
           </p>
           <div className="footer-socials">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <a href="https://www.facebook.com/share/1ByNzECWn4/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <Facebook size={20} />
             </a>
             <a href="https://wa.me/923395186263" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
               <FaWhatsapp size={20} />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a href="https://www.instagram.com/paksource.connect?igsh=cDZnMDBsdzQyYWd4" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <Instagram size={20} />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/company/paksource-connect/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <Linkedin size={20} />
             </a>
           </div>
@@ -41,7 +41,7 @@ export default function Footer() {
             <li><Link to="/about">About Us</Link></li>
             <li><Link to="/services">Our Services</Link></li>
             <li><Link to="/request-sourcing">Request Sourcing</Link></li>
-            <li><Link to="/more">Contact & FAQ</Link></li>
+            <li><Link to="/contact">Contact Us</Link></li>
           </ul>
         </div>
 
@@ -51,7 +51,7 @@ export default function Footer() {
           <ul>
             <li>
               <Phone size={18} className="text-muted" />
-              <span>+92 3395186263</span>
+              <span>+92 313 8385059</span>
             </li>
             <li>
               <Mail size={18} className="text-muted" />
