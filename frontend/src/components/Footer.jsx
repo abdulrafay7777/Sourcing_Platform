@@ -5,7 +5,7 @@ import './Footer.css'
 
 export default function Footer() {
   return (
-    <footer className="footer bg-darker">
+    <footer className="footer">
       <div className="max-w-7xl mx-auto footer-grid">
         
         {/* Brand Section */}

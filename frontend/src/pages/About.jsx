@@ -1,9 +1,16 @@
 import { motion } from 'framer-motion'
-import { Target, Lightbulb, ShieldCheck, Users } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Target, Lightbulb, ShieldCheck, Users, UserCheck, Tag, Truck, Headset } from 'lucide-react'
 import { pageTransition, fadeUp } from '../utils/animations'
 import './About.css'
 import aboutImage from '../assets/images/about_illustration.png'
+
+const FEATURES = [
+  { icon: UserCheck, title: 'Verified Suppliers', description: 'We connect you with trusted and reliable suppliers only.' },
+  { icon: Tag, title: 'Best Market Rates', description: 'We negotiate the best possible rates to maximize your profit.' },
+  { icon: ShieldCheck, title: 'Quality Assurance', description: 'Every product is checked for quality and authenticity.' },
+  { icon: Truck, title: 'Nationwide Reach', description: 'We source from across the country to meet your business needs.' },
+  { icon: Headset, title: 'End-to-End Support', description: 'From product search to delivery — we\'re with you at every step.' }
+];
 
 export default function About() {
   return (
@@ -17,7 +24,7 @@ export default function About() {
         </motion.div>
       </section>
 
-      <section className="about-content section-container bg-darker">
+      <section className="about-content section-container bg-darker" style={{ borderBottom: 'none' }}>
         <div className="max-w-5xl mx-auto">
           <div className="about-split">
             <motion.div
@@ -90,12 +97,43 @@ export default function About() {
               <div className="about-icon-wrapper text-secondary"><Users size={40} /></div>
               <h2 className="about-card-title">Why Choose Us</h2>
               <p className="section-text">
-                With deep local market knowledge, an extensive supplier network, and a commitment to your success, we are more than just a sourcing agency – we are your strategic growth partner.
+                With deep local market knowledge, an extensive supplier network, and a commitment to your success, we are more than just a sourcing agency - we are your strategic growth partner.
               </p>
             </motion.div>
           </div>
         </div>
       </section>
+
+      {/* Trusted Sourcing Section from Mockup */}
+      <section className="section-container" style={{ paddingTop: '5rem', paddingBottom: '5rem' }}>
+        <div className="max-w-7xl mx-auto text-center">
+          <h1 className="trusted-title">
+            Trusted Sourcing. Better Connections.
+          </h1>
+          <p className="trusted-subtitle">
+            We work behind the scenes to connect your business with verified suppliers<br className="hidden md:block" />
+            across Pakistan. Our strong industry network and local expertise help you get<br className="hidden md:block" />
+            the right products at the right prices — every time.
+          </p>
+ 
+          <div className="trusted-features-grid">
+            {FEATURES.map(({ icon: Icon, title, description }) => (
+              <div key={title} className="trusted-card">
+                <div className="trusted-icon">
+                  <Icon size={24} strokeWidth={2} />
+                </div>
+                <h3 className="trusted-card-title">{title}</h3>
+                <p className="trusted-card-desc">{description}</p>
+              </div>
+            ))}
+          </div>
+ 
+          <p className="trusted-footer-text">
+            Focus on growing your business. We'll handle the sourcing.
+          </p>
+        </div>
+      </section>
+
     </motion.div>
   )
 }

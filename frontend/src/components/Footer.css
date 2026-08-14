@@ -1,6 +1,7 @@
 .footer {
   padding-top: 4rem;
   margin-top: auto;
+  background-color: var(--color-footer-bg);
 }
 
 .footer-grid {
