@@ -1,7 +1,7 @@
 import os
 import shutil
 import uuid
-from datetime import datetime
+from datetime import datetime, date
 from typing import Optional, List
 
 from fastapi import APIRouter, Depends, UploadFile, File, Form, HTTPException, BackgroundTasks
@@ -37,8 +37,8 @@ async def create_sourcing_request(
     specifications: Optional[str] = Form(None),
     quantity: str = Form(...),
     target_price: Optional[float] = Form(None),
-    delivery_date: Optional[datetime] = Form(None),
-    files: List[UploadFile] = File(default=[]),
+    delivery_date: Optional[date] = Form(None),
+    files: Optional[List[UploadFile]] = File(None),
     db: Session = Depends(get_db),
 ):
     sourcing_request = SourcingRequest(
@@ -53,12 +53,12 @@ async def create_sourcing_request(
         specifications=specifications,
         quantity=quantity,
         target_price=target_price,
-        delivery_date=delivery_date,
+        delivery_date=datetime.combine(delivery_date, datetime.min.time()) if delivery_date else None,
     )
     db.add(sourcing_request)
     db.flush()  # get the auto-increment id before commit
 
-    for upload in files:
+    for upload in files or []:
         if upload.content_type not in ALLOWED_TYPES:
             raise HTTPException(400, f"File type not allowed: {upload.content_type}")
         contents = await upload.read()

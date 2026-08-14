@@ -6,12 +6,13 @@ from .config import settings
 logger = logging.getLogger(__name__)
 
 def send_sourcing_email(request_id: str, company_name: str, product_name: str, email: str, phone: str, description: str):
-    target_email = "Contact@paksourceconnect.com"
-    
+    target_email = "paksource.14@gmail.com"
+
     msg = EmailMessage()
     msg['Subject'] = f"New Sourcing Request: {product_name} from {company_name}"
     msg['From'] = settings.smtp_from
     msg['To'] = target_email
+    msg['Reply-To'] = email
     
     body = f"""A new sourcing request has been submitted.
     

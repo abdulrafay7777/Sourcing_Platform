@@ -61,9 +61,7 @@ export default function RequestSourcing() {
       if (form.deliveryDate) payload.append('delivery_date', form.deliveryDate)
       files.forEach((f) => payload.append('files', f))
 
-      const res = await axios.post(`${API_BASE}/api/sourcing-requests`, payload, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      })
+      const res = await axios.post(`${API_BASE}/api/sourcing-requests`, payload)
       const reqId = res.data.request_id
       setRequestId(reqId)
       

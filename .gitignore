@@ -36,3 +36,12 @@ venv.bak/
 *.njsproj
 *.sln
 *.sw?
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploads
+backend/uploads/
+uploads/
