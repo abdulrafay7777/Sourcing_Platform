@@ -21,7 +21,7 @@ export default function Footer() {
             <a href="https://www.facebook.com/share/1ByNzECWn4/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <Facebook size={20} />
             </a>
-            <a href="https://wa.me/923395186263" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <a href="https://wa.me/923138385059" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
               <FaWhatsapp size={20} />
             </a>
             <a href="https://www.instagram.com/paksource.connect?igsh=cDZnMDBsdzQyYWd4" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
