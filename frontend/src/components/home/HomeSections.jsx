@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion'
 import { CheckCircle2, Star, Quote, ArrowRight } from 'lucide-react'
-import { fadeUp } from '../../utils/animations'
+import { fadeUp, scrollFadeUp } from '../../utils/animations'
 import heroImage from '../../assets/images/hero_illustration.png'
 
 export function WhyChooseUs() {
   return (
     <section className="section-container">
       <div className="split-section max-w-7xl mx-auto">
-        <motion.div variants={fadeUp} initial="initial" whileInView="animate" viewport={{ once: true, amount: 0.3 }} className="split-text">
+        <motion.div variants={scrollFadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="split-text">
           <h2 className="section-title">Why Choose Us</h2>
           <h3 className="section-subtitle">We Do the Market Hunting So You Don't Have To</h3>
           <p className="section-text">
@@ -17,7 +17,7 @@ export function WhyChooseUs() {
             Whether you're a retailer, distributor, importer, manufacturer, or e-commerce seller, we simplify your procurement process.
           </p>
         </motion.div>
-        <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5 }} className="split-image">
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.5 }} className="split-image">
           <img src={heroImage} alt="Wholesale Sourcing" />
         </motion.div>
       </div>
@@ -36,7 +36,7 @@ export function OurServices({ services }) {
               key={svc.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="service-card glass-panel"
             >
@@ -62,7 +62,7 @@ export function IndustriesWeServe({ industries }) {
               key={industry}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.5 }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
               className="industry-tag"
             >
@@ -86,7 +86,7 @@ export function HowItWorks({ steps }) {
               key={step.title}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="step-item glass-panel"
             >
@@ -113,7 +113,7 @@ export function TrustSection({ benefits }) {
               key={benefit}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.3, delay: i * 0.08 }}
               className="trust-item"
             >
@@ -141,7 +141,7 @@ export function TestimonialsSection({ testimonials }) {
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="testimonial-card glass-panel"
             >
@@ -175,7 +175,7 @@ export function CTASection({ navigate }) {
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, amount: 0.5 }}
+        viewport={{ once: true, margin: "-100px" }}
         className="cta-box glass-panel"
       >
         <h2 className="cta-title">Ready to Source Your Next Product?</h2>
