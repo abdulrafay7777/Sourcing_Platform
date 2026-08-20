@@ -35,7 +35,7 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
-  box-shadow: 0 0 15px rgba(45, 212, 191, 0.3);
+  box-shadow: 0 0 15px rgba(var(--color-accent-rgb), 0.3);
 }
 
 .timeline-line {
@@ -89,3 +89,4 @@
   padding-left: 0.5rem;
   color: var(--color-text-faint);
 }
+
