@@ -14,14 +14,13 @@ from ..email import send_sourcing_email
 
 router = APIRouter(prefix="/api/sourcing-requests", tags=["sourcing-requests"])
 
-UPLOAD_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "uploads")
+UPLOAD_DIR = os.environ.get("UPLOAD_DIR", os.path.join(os.path.dirname(os.path.dirname(__file__)), "uploads"))
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 ALLOWED_TYPES = {"image/jpeg", "image/png", "image/webp", "application/pdf",
                  "application/msword",
                  "application/vnd.openxmlformats-officedocument.wordprocessingml.document"}
-MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
-
+MAX_FILE_SIZE = 20 * 1024 * 1024  # 20MB
 
 @router.post("", response_model=SourcingRequestCreated, status_code=201)
 async def create_sourcing_request(
@@ -58,10 +57,15 @@ async def create_sourcing_request(
     db.add(sourcing_request)
     db.flush()  # get the auto-increment id before commit
 
+    saved_files = []
+    total_size = 0
     for upload in files or []:
         if upload.content_type not in ALLOWED_TYPES:
             raise HTTPException(400, f"File type not allowed: {upload.content_type}")
         contents = await upload.read()
+        total_size += len(contents)
+        if total_size > 20 * 1024 * 1024:
+            raise HTTPException(400, "Total file size exceeds the 20MB limit.")
         if len(contents) > MAX_FILE_SIZE:
             raise HTTPException(400, f"File too large: {upload.filename}")
 
@@ -69,6 +73,8 @@ async def create_sourcing_request(
         stored_path = os.path.join(UPLOAD_DIR, safe_name)
         with open(stored_path, "wb") as f:
             f.write(contents)
+            
+        saved_files.append((stored_path, upload.filename, upload.content_type))
 
         db.add(RequestFile(
             request_id=sourcing_request.id,
@@ -87,7 +93,8 @@ async def create_sourcing_request(
         product_name=sourcing_request.product_name,
         email=sourcing_request.email,
         phone=sourcing_request.phone,
-        description=sourcing_request.description or ""
+        description=sourcing_request.description or "",
+        files=saved_files
     )
     # WhatsApp notification TODO left for later
 

@@ -5,10 +5,22 @@ from .config import settings
 
 logger = logging.getLogger(__name__)
 
-def send_sourcing_email(request_id: str, company_name: str, product_name: str, email: str, phone: str, description: str):
+import os
+
+def send_sourcing_email(request_id: str, company_name: str, product_name: str, email: str, phone: str, description: str, files: list = None):
     admin_email = "paksource.14@gmail.com"
     sender_name = "PakSource Connect"
     sender_address = f"{sender_name} <{settings.smtp_from}>"
+
+    # Calculate total file size
+    total_size = 0
+    valid_files = []
+    if files:
+        for f_path, f_name, f_type in files:
+            if os.path.exists(f_path):
+                size = os.path.getsize(f_path)
+                total_size += size
+                valid_files.append((f_path, f_name, f_type, size))
 
     # 1. Email to the Admin (You)
     admin_msg = EmailMessage()
@@ -26,7 +38,24 @@ Phone: {phone}
 Product: {product_name}
 Description: {description}
 """
+
+    if total_size > 20 * 1024 * 1024:
+        pass # Limit is now enforced on frontend; this is just a silent fallback.
+    
     admin_msg.set_content(admin_body)
+
+    # Safely attach files if under 20MB total
+    if total_size <= 20 * 1024 * 1024:
+        import mimetypes
+        for f_path, f_name, f_type, size in valid_files:
+            try:
+                with open(f_path, 'rb') as fp:
+                    file_data = fp.read()
+                maintype, subtype = f_type.split('/', 1) if '/' in f_type else ('application', 'octet-stream')
+                admin_msg.add_attachment(file_data, maintype=maintype, subtype=subtype, filename=f_name)
+            except Exception as e:
+                logger.error(f"Failed to attach {f_name}: {e}")
+
 
     # 2. Confirmation Email to the Customer
     customer_msg = EmailMessage()

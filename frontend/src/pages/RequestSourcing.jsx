@@ -46,6 +46,15 @@ export default function RequestSourcing() {
     setError(null)
 
     try {
+      // Enforce total file size limit (20MB) on frontend
+      const totalSize = files.reduce((acc, file) => acc + file.size, 0)
+      if (totalSize > 20 * 1024 * 1024) {
+        setError('Total file size exceeds the 20MB limit. Please upload smaller files.')
+        setTimeout(() => setError(null), 5000)
+        setSubmitting(false)
+        return
+      }
+
       const payload = new FormData()
       payload.append('company_name', form.companyName)
       payload.append('owner_name', form.ownerName)
@@ -64,11 +73,10 @@ export default function RequestSourcing() {
       const res = await axios.post(`${API_BASE}/api/sourcing-requests`, payload)
       const reqId = res.data.request_id
       setRequestId(reqId)
-      
-      const shortId = reqId.toString().split('-').pop() || reqId.toString();
-      setTrackingId(`TRK-${shortId.substring(0,6).toUpperCase()}`)
+      setTrackingId(reqId)
     } catch (err) {
       setError(err?.response?.data?.detail ?? 'Something went wrong. Please try again.')
+      setTimeout(() => setError(null), 5000)
     } finally {
       setSubmitting(false)
     }
@@ -169,11 +177,19 @@ export default function RequestSourcing() {
             </AnimatePresence>
           </Field>
 
-          {error && (
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="form-error">
-              {error}
-            </motion.p>
-          )}
+          <AnimatePresence>
+            {error && (
+              <motion.div 
+                initial={{ opacity: 0, y: 50 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                exit={{ opacity: 0, y: 50 }}
+                className="error-toast"
+              >
+                <span>{error}</span>
+                <button type="button" onClick={() => setError(null)}><X size={16} /></button>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <button type="submit" disabled={submitting} className="btn btn-primary btn-submit">
             {submitting ? (

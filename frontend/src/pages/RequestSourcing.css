@@ -203,14 +203,44 @@
   background: rgba(248, 113, 113, 0.1);
 }
 
-.form-error {
-  color: var(--color-danger);
-  font-size: 0.9rem;
-  background: rgba(248, 113, 113, 0.1);
-  border: 1px solid rgba(248, 113, 113, 0.2);
-  padding: 1rem;
-  border-radius: var(--radius-md);
-  margin: 0;
+.error-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-ink-950);
+  border: 1px solid var(--color-danger);
+  color: var(--color-text);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 50;
+  min-width: 300px;
+  justify-content: space-between;
+}
+
+.error-toast span {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.error-toast button {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+
+.error-toast button:hover {
+  color: var(--color-text);
 }
 
 .btn-submit {
