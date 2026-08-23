@@ -98,28 +98,28 @@ export default function RequestSourcing() {
       <div className="form-container glass-panel">
         <form onSubmit={handleSubmit} className="form">
           <div className="form-grid">
-            <Field label="Company Name">
+            <Field label="Company Name" required>
               <input required value={form.companyName} onChange={update('companyName')} />
             </Field>
-            <Field label="Owner Name">
+            <Field label="Owner Name" required>
               <input required value={form.ownerName} onChange={update('ownerName')} />
             </Field>
-            <Field label="Phone Number">
+            <Field label="Phone Number" required>
               <input required value={form.phone} onChange={update('phone')} />
             </Field>
-            <Field label="Email">
+            <Field label="Email" required>
               <input required type="email" value={form.email} onChange={update('email')} />
             </Field>
-            <Field label="City">
+            <Field label="City" required>
               <input required value={form.city} onChange={update('city')} />
             </Field>
           </div>
 
           <div className="form-grid">
-            <Field label="Product Name">
+            <Field label="Product Name" required>
               <input required value={form.productName} onChange={update('productName')} />
             </Field>
-            <Field label="Product Category">
+            <Field label="Product Category" required>
               <select required value={form.productCategory} onChange={update('productCategory')}>
                 <option value="" disabled>Select a category...</option>
                 <option value="Electronics">Electronics</option>
@@ -143,18 +143,18 @@ export default function RequestSourcing() {
           </Field>
 
           <div className="form-grid">
-            <Field label="Required Quantity">
+            <Field label="Required Quantity" required>
               <input required value={form.quantity} onChange={update('quantity')} placeholder="e.g. 5000 units" />
             </Field>
             <Field label="Target Price (Optional)">
               <input type="number" step="0.01" value={form.targetPrice} onChange={update('targetPrice')} placeholder="PKR per unit" />
             </Field>
-            <Field label="Required Delivery Date">
+            <Field label="Required Delivery Date" required>
               <input required type="date" value={form.deliveryDate} onChange={update('deliveryDate')} />
             </Field>
           </div>
 
-          <Field label="Upload Images / Documents">
+          <Field label="Upload Images / Documents" required>
             <label className="upload-dropzone">
               <UploadCloud size={32} className="upload-dropzone-icon" />
               <span className="upload-dropzone-text">Click to upload, or drag files here</span>
