@@ -46,7 +46,13 @@ export default function RequestSourcing() {
     setError(null)
 
     try {
-      // Enforce total file size limit (20MB) on frontend
+      if (files.length === 0) {
+        setError('Please upload at least one image or document.')
+        setTimeout(() => setError(null), 5000)
+        setSubmitting(false)
+        return
+      }
+
       const totalSize = files.reduce((acc, file) => acc + file.size, 0)
       if (totalSize > 20 * 1024 * 1024) {
         setError('Total file size exceeds the 20MB limit. Please upload smaller files.')
@@ -67,7 +73,7 @@ export default function RequestSourcing() {
       if (form.specifications) payload.append('specifications', form.specifications)
       payload.append('quantity', form.quantity)
       if (form.targetPrice) payload.append('target_price', form.targetPrice)
-      if (form.deliveryDate) payload.append('delivery_date', form.deliveryDate)
+      payload.append('delivery_date', form.deliveryDate)
       files.forEach((f) => payload.append('files', f))
 
       const res = await axios.post(`${API_BASE}/api/sourcing-requests`, payload)
@@ -144,7 +150,7 @@ export default function RequestSourcing() {
               <input type="number" step="0.01" value={form.targetPrice} onChange={update('targetPrice')} placeholder="PKR per unit" />
             </Field>
             <Field label="Required Delivery Date">
-              <input type="date" value={form.deliveryDate} onChange={update('deliveryDate')} />
+              <input required type="date" value={form.deliveryDate} onChange={update('deliveryDate')} />
             </Field>
           </div>
 

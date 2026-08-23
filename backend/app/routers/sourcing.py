@@ -36,8 +36,8 @@ async def create_sourcing_request(
     specifications: Optional[str] = Form(None),
     quantity: str = Form(...),
     target_price: Optional[float] = Form(None),
-    delivery_date: Optional[date] = Form(None),
-    files: Optional[List[UploadFile]] = File(None),
+    delivery_date: date = Form(...),
+    files: List[UploadFile] = File(...),
     db: Session = Depends(get_db),
 ):
     sourcing_request = SourcingRequest(
@@ -59,7 +59,7 @@ async def create_sourcing_request(
 
     saved_files = []
     total_size = 0
-    for upload in files or []:
+    for upload in files:
         if upload.content_type not in ALLOWED_TYPES:
             raise HTTPException(400, f"File type not allowed: {upload.content_type}")
         contents = await upload.read()
