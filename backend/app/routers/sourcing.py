@@ -37,7 +37,7 @@ async def create_sourcing_request(
     quantity: str = Form(...),
     target_price: Optional[float] = Form(None),
     delivery_date: date = Form(...),
-    files: List[UploadFile] = File(...),
+    files: Optional[List[UploadFile]] = File(None),
     db: Session = Depends(get_db),
 ):
     sourcing_request = SourcingRequest(
@@ -59,29 +59,30 @@ async def create_sourcing_request(
 
     saved_files = []
     total_size = 0
-    for upload in files:
-        if upload.content_type not in ALLOWED_TYPES:
-            raise HTTPException(400, f"File type not allowed: {upload.content_type}")
-        contents = await upload.read()
-        total_size += len(contents)
-        if total_size > 20 * 1024 * 1024:
-            raise HTTPException(400, "Total file size exceeds the 20MB limit.")
-        if len(contents) > MAX_FILE_SIZE:
-            raise HTTPException(400, f"File too large: {upload.filename}")
+    if files:
+        for upload in files:
+            if upload.content_type not in ALLOWED_TYPES:
+                raise HTTPException(400, f"File type not allowed: {upload.content_type}")
+            contents = await upload.read()
+            total_size += len(contents)
+            if total_size > 20 * 1024 * 1024:
+                raise HTTPException(400, "Total file size exceeds the 20MB limit.")
+            if len(contents) > MAX_FILE_SIZE:
+                raise HTTPException(400, f"File too large: {upload.filename}")
 
-        safe_name = f"{uuid.uuid4().hex}_{upload.filename}"
-        stored_path = os.path.join(UPLOAD_DIR, safe_name)
-        with open(stored_path, "wb") as f:
-            f.write(contents)
-            
-        saved_files.append((stored_path, upload.filename, upload.content_type))
+            safe_name = f"{uuid.uuid4().hex}_{upload.filename}"
+            stored_path = os.path.join(UPLOAD_DIR, safe_name)
+            with open(stored_path, "wb") as f:
+                f.write(contents)
+                
+            saved_files.append((stored_path, upload.filename, upload.content_type))
 
-        db.add(RequestFile(
-            request_id=sourcing_request.id,
-            filename=upload.filename,
-            stored_path=stored_path,
-            content_type=upload.content_type,
-        ))
+            db.add(RequestFile(
+                request_id=sourcing_request.id,
+                filename=upload.filename,
+                stored_path=stored_path,
+                content_type=upload.content_type,
+            ))
 
     db.commit()
     db.refresh(sourcing_request)

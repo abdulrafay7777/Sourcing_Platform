@@ -46,13 +46,6 @@ export default function RequestSourcing() {
     setError(null)
 
     try {
-      if (files.length === 0) {
-        setError('Please upload at least one image or document.')
-        setTimeout(() => setError(null), 5000)
-        setSubmitting(false)
-        return
-      }
-
       const totalSize = files.reduce((acc, file) => acc + file.size, 0)
       if (totalSize > 20 * 1024 * 1024) {
         setError('Total file size exceeds the 20MB limit. Please upload smaller files.')
@@ -154,7 +147,7 @@ export default function RequestSourcing() {
             </Field>
           </div>
 
-          <Field label="Upload Images / Documents" required>
+          <Field label="Upload Images / Documents (Optional)">
             <label className="upload-dropzone">
               <UploadCloud size={32} className="upload-dropzone-icon" />
               <span className="upload-dropzone-text">Click to upload, or drag files here</span>
