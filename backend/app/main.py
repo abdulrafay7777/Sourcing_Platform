@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .database import engine, Base
 from .routers import sourcing
+from .config import settings
 
 Base.metadata.create_all(bind=engine)
 
@@ -10,7 +11,7 @@ app = FastAPI(title="PakSource Connect API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Vite dev server; add prod domain later
+    allow_origins=["http://localhost:5173", settings.frontend_url],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
